@@ -1,5 +1,7 @@
 package com.aluracursos.screenmatch2.model;
 
+import com.aluracursos.screenmatch2.service.ConsultaChatGPT;
+import com.aluracursos.screenmatch2.service.ConsultaGemini;
 import com.fasterxml.jackson.annotation.JsonAlias;
 
 import java.util.OptionalDouble;
@@ -25,8 +27,9 @@ public class Serie {
                 .trim());                  //no traiga ningun valor vacio
 
         this.actores = datosSerie.actores();
-        this.sinopsis = datosSerie.sinopsis();
-        //this.sinopsis = ConsultaChatGPT.obtenerTraduccion(datosSerie.sinopsis()) ;
+        //this.sinopsis = datosSerie.sinopsis();  //sin IA
+        //this.sinopsis = ConsultaChatGPT .obtenerTraduccion(datosSerie.sinopsis()) ;   //ChatGPT
+        this.sinopsis = ConsultaGemini.obtenerTraduccion(datosSerie.sinopsis());        //Gemini
     }
 
     //Gets y Sets

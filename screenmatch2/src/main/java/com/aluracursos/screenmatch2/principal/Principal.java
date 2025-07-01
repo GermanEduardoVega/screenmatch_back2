@@ -2,11 +2,15 @@ package com.aluracursos.screenmatch2.principal;
 
 import com.aluracursos.screenmatch2.model.DatosSerie;
 import com.aluracursos.screenmatch2.model.DatosTemporadas;
+import com.aluracursos.screenmatch2.model.Serie;
 import com.aluracursos.screenmatch2.service.ConsumoAPI;
 import com.aluracursos.screenmatch2.service.ConvierteDatos;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
 public class Principal {
     private Scanner teclado = new Scanner(System.in);
     private ConsumoAPI consumoApi = new ConsumoAPI();
@@ -78,8 +82,14 @@ public class Principal {
         System.out.println(datos);
     }
 
-    private void mostrarSeriesBuscadas() {
-        datosSeries.forEach(System.out::println);
+        private void mostrarSeriesBuscadas() {
+        List<Serie> series = new ArrayList<>();
+        series = datosSeries.stream()
+                                .map(datosSerie -> new Serie(datosSerie)) //transformacion donde cada tipo dato serie va a convertirse en un nueva serie que va a recibir en su contructor esos datos series
+                                .collect(Collectors.toList());            // convertir todo eso a una nueva lista
+        series.stream()
+                .sorted(Comparator.comparing(Serie::getGenero))            //ordena esas series a travez del genero
+                .forEach(System.out::println);
     }
 
 

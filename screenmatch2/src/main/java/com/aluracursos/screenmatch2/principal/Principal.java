@@ -15,6 +15,7 @@ public class Principal {
     //private final String API_KEY = "TU-APIKEY-OMDB";
     private final String SEPARADOR_APIKEY = "&apikey=";
     private ConvierteDatos conversor = new ConvierteDatos();
+    private List<DatosSerie> datosSeries = new ArrayList<>();
 
     public void muestraElMenu() {
         var opcion = -1;
@@ -37,6 +38,8 @@ public class Principal {
                 case 2:
                     buscarEpisodioPorSerie();
                     break;
+                case 3:
+                    mostrarSeriesBuscadas();
 
                 case 0:
                     System.out.println("Cerrando la aplicación...");
@@ -47,6 +50,8 @@ public class Principal {
         }
 
     }
+
+
 
     private DatosSerie getDatosSerie() {
         System.out.println("Escribe el nombre de la serie que deseas buscar");
@@ -69,7 +74,12 @@ public class Principal {
     }
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
+        datosSeries.add(datos);
         System.out.println(datos);
+    }
+
+    private void mostrarSeriesBuscadas() {
+        datosSeries.forEach(System.out::println);
     }
 
 

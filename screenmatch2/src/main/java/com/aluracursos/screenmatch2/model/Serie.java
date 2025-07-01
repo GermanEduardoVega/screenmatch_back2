@@ -13,6 +13,24 @@ public class Serie {
     private String actores;
     private String sinopsis;
 
+    //CONSTRUCTOR
+    public Serie(DatosSerie datosSerie){    //referencia datosSerie para conseguir crear una serie del record
+        this.titulo = datosSerie.titulo();
+        this.totalDeTemporadas = datosSerie.totalDeTemporadas();
+        this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);     //transformacion de datos series de string al double
+        this.poster = datosSerie.poster();
+        //this.genero = datosSerie.genero();
+        this.genero = Categoria.fromString(datosSerie.genero()
+                .split(",")[0]       // realiza la separacion , punto de quiebre la , usa el primero
+                .trim());                  //no traiga ningun valor vacio
+
+        this.actores = datosSerie.actores();
+        this.sinopsis = datosSerie.sinopsis();
+        //this.sinopsis = ConsultaChatGPT.obtenerTraduccion(datosSerie.sinopsis()) ;
+    }
+
+    //Gets y Sets
+
     public String getTitulo() {
         return titulo;
     }
@@ -69,18 +87,15 @@ public class Serie {
         this.sinopsis = sinopsis;
     }
 
-    public Serie(DatosSerie datosSerie){    //referencia datosSerie para conseguir crear una serie del record
-        this.titulo = datosSerie.titulo();
-        this.totalDeTemporadas = datosSerie.totalDeTemporadas();
-        this.evaluacion = OptionalDouble.of(Double.valueOf(datosSerie.evaluacion())).orElse(0);     //transformacion de datos series de string al double
-        this.poster = datosSerie.poster();
-        //this.genero = datosSerie.genero();
-        this.genero = Categoria.fromString(datosSerie.genero()
-                                                     .split(",")[0]       // realiza la separacion , punto de quiebre la , usa el primero
-                                                     .trim());                  //no traiga ningun valor vacio
-
-        this.actores = datosSerie.actores();
-        this.sinopsis = datosSerie.sinopsis();
-        //this.sinopsis = ConsultaChatGPT.obtenerTraduccion(datosSerie.sinopsis()) ;
+    @Override
+    public String toString() {
+        return 
+                "titulo='" + titulo + '\'' +
+                ", totalDeTemporadas=" + totalDeTemporadas +
+                ", evaluacion=" + evaluacion +
+                ", poster='" + poster + '\'' +
+                ", genero=" + genero +
+                ", actores='" + actores + '\'' +
+                ", sinopsis='" + sinopsis + '\'' ;
     }
 }

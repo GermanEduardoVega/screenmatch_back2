@@ -16,7 +16,7 @@ public class Principal {
     private final String SEPARADOR_APIKEY = "&apikey=";
     private ConvierteDatos conversor = new ConvierteDatos();
 
-    public void muestraElMenu() {git s
+    public void muestraElMenu() {
         var opcion = -1;
         while (opcion != 0) {
             var menu = """

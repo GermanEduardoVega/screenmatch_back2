@@ -3,14 +3,26 @@ package com.aluracursos.screenmatch2.model;
 import com.aluracursos.screenmatch2.service.ConsultaChatGPT;
 import com.aluracursos.screenmatch2.service.ConsultaGemini;
 import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.persistence.*;
 
 import java.util.OptionalDouble;
 
+/**
+ * Al momento de queres tener esta clase serie como una clase que almacene los valores en una base de datos voy a utilizar las anotaciones
+ * que me brinda JPA para dotar esta clase como una Entidad y que esta se comporte guardandome los datos en una BD
+ */
+@Entity
+@Table(name = "series")
 public class Serie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
     private String titulo;
     private Integer totalDeTemporadas;
     private Double evaluacion;
     private String poster;
+    @Enumerated(EnumType.STRING)    //ORDINAL ocupa la posicion y si en el futuro se cambia traeria problemas
     private Categoria genero;
     private String actores;
     private String sinopsis;

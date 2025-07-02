@@ -47,7 +47,7 @@ public class Serie {
     //Gets y Sets
 
 
-    public Long getId() {
+    public Long getId() { 
         return id;
     }
 

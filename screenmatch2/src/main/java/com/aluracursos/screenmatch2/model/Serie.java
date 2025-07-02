@@ -46,6 +46,15 @@ public class Serie {
 
     //Gets y Sets
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
     }

@@ -27,7 +27,7 @@ public class Serie {
     private Categoria genero;
     private String actores;
     private String sinopsis;
-    @Transient  //en este momento no se va a usar , NO SE VA A MAPEAR por ahora
+    @OneToMany(mappedBy = "serie")
     private List<Episodio> episodios;   //una Serie contiene una lista de episodios que se mapea
 
     //CONSTRUCTOR PREDETERMINADO

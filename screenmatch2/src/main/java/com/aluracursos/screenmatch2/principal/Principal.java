@@ -3,6 +3,7 @@ package com.aluracursos.screenmatch2.principal;
 import com.aluracursos.screenmatch2.model.DatosSerie;
 import com.aluracursos.screenmatch2.model.DatosTemporadas;
 import com.aluracursos.screenmatch2.model.Serie;
+import com.aluracursos.screenmatch2.model.repository.SerieRepository;
 import com.aluracursos.screenmatch2.service.ConsumoAPI;
 import com.aluracursos.screenmatch2.service.ConvierteDatos;
 import java.util.ArrayList;
@@ -20,6 +21,12 @@ public class Principal {
     private final String SEPARADOR_APIKEY = "&apikey=";
     private ConvierteDatos conversor = new ConvierteDatos();
     private List<DatosSerie> datosSeries = new ArrayList<>();
+
+    private SerieRepository repositorio;
+
+    public Principal(SerieRepository serieRepository) {
+        this.repositorio = serieRepository;
+    }
 
     public void muestraElMenu() {
         var opcion = -1;
@@ -78,7 +85,9 @@ public class Principal {
     }
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
-        datosSeries.add(datos);
+        Serie serie = new Serie(datos);
+        repositorio.save(serie);
+        //datosSeries.add(datos);
         System.out.println(datos);
     }
 

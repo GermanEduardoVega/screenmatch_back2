@@ -86,16 +86,13 @@ public class Principal {
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
         Serie serie = new Serie(datos);
-        repositorio.save(serie);    
+        repositorio.save(serie);
         //datosSeries.add(datos);
         System.out.println(datos);
     }
 
         private void mostrarSeriesBuscadas() {
-        List<Serie> series = new ArrayList<>();
-        series = datosSeries.stream()
-                                .map(datosSerie -> new Serie(datosSerie)) //transformacion donde cada tipo dato serie va a convertirse en un nueva serie que va a recibir en su contructor esos datos series
-                                .collect(Collectors.toList());            // convertir todo eso a una nueva lista
+        List<Serie> series = repositorio.findAll();
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))            //ordena esas series a travez del genero
                 .forEach(System.out::println);

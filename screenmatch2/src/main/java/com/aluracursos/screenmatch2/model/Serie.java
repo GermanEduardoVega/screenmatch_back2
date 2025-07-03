@@ -30,7 +30,11 @@ public class Serie {
     @Transient  //en este momento no se va a usar , NO SE VA A MAPEAR por ahora
     private List<Episodio> episodios;   //una Serie contiene una lista de episodios que se mapea
 
-    //CONSTRUCTOR
+    //CONSTRUCTOR PREDETERMINADO
+    public Serie() {
+    }
+
+    //CONSTRUCTOR SOBRECARGADO
     public Serie(DatosSerie datosSerie){    //referencia datosSerie para conseguir crear una serie del record
         this.titulo = datosSerie.titulo();
         this.totalDeTemporadas = datosSerie.totalDeTemporadas();

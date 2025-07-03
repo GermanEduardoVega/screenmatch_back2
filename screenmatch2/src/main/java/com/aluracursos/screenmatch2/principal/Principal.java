@@ -86,7 +86,7 @@ public class Principal {
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
         Serie serie = new Serie(datos);
-        repositorio.save(serie);
+        repositorio.save(serie);    
         //datosSeries.add(datos);
         System.out.println(datos);
     }

@@ -5,6 +5,7 @@ import com.aluracursos.screenmatch2.service.ConsultaGemini;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.OptionalDouble;
 
@@ -118,6 +119,17 @@ public class Serie {
         this.sinopsis = sinopsis;
     }
 
+
+    public List<Episodio> getEpisodios() {
+        return episodios;
+    }
+
+    public void setEpisodios(List<Episodio> episodios) {
+
+        episodios.forEach(e -> e.setSerie(this));
+        this.episodios = episodios;
+    }
+
     @Override
     public String toString() {
         return  "genero=" + genero +
@@ -127,5 +139,6 @@ public class Serie {
                 ", poster='" + poster + '\'' +
                 ", actores='" + actores + '\'' +
                 ", sinopsis='" + sinopsis + '\'' ;
+               // ", episodios='" + episodios + '\'';
     }
 }

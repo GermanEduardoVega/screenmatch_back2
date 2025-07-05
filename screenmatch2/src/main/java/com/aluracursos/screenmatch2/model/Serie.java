@@ -28,7 +28,7 @@ public class Serie {
     private Categoria genero;
     private String actores;
     private String sinopsis;
-    @OneToMany(mappedBy = "serie",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "serie",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Episodio> episodios;   //una Serie contiene una lista de episodios que se mapea
 
     //CONSTRUCTOR PREDETERMINADO
@@ -139,6 +139,6 @@ public class Serie {
                 ", poster='" + poster + '\'' +
                 ", actores='" + actores + '\'' +
                 ", sinopsis='" + sinopsis + '\'' ;
-                //", episodios='" + episodios + '\'';
+                //", episodios='" + episodios + '\'';       //mostramos los episodios
     }
 }

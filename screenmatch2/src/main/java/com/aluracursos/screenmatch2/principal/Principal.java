@@ -31,7 +31,7 @@ public class Principal {
         var opcion = -1;
         while (opcion != 0) {
             var menu = """
-                    1 - Buscar series 
+                    1 - Buscar series
                     2 - Buscar episodios
                     3 - Mostrar series buscadas
                                   
@@ -50,7 +50,7 @@ public class Principal {
                     break;
                 case 3:
                     mostrarSeriesBuscadas();
-
+                    break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
                     break;
@@ -58,9 +58,7 @@ public class Principal {
                     System.out.println("Opción inválida");
             }
         }
-
     }
-
 
 
     private DatosSerie getDatosSerie() {
@@ -77,9 +75,8 @@ public class Principal {
         var nombreSerie  = teclado.nextLine();
 
         Optional<Serie> serie = series.stream()
-                                        .filter(s -> s.getTitulo().toLowerCase().contains(nombreSerie.toLowerCase()))   //importancia de mayuscuclas a minusculas y vicebersa
+                                        .filter(s -> s.getTitulo().toLowerCase().contains(nombreSerie.toLowerCase()))   //importancia de mayusculas a minusculas y vicebersa
                                         .findFirst();
-
         if (serie.isPresent()) {
             var serieEncontrada = serie.get();
             List<DatosTemporadas> temporadas = new ArrayList<>();
@@ -90,6 +87,8 @@ public class Principal {
                 temporadas.add(datosTemporada);
             }
             temporadas.forEach(System.out::println);
+
+            //Convertimos esas temporadas en episodios
             List<Episodio> episodios = temporadas.stream()
                     .flatMap(datosTemporadas -> datosTemporadas.episodios().stream()
                             .map(datosEpisodio -> new Episodio(datosTemporadas.numero(),datosEpisodio)))
@@ -107,12 +106,10 @@ public class Principal {
         System.out.println(datos);
     }
 
-        private void mostrarSeriesBuscadas() {
-         series = repositorio.findAll();
+    private void mostrarSeriesBuscadas() {
+        series = repositorio.findAll();
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))            //ordena esas series a travez del genero
                 .forEach(System.out::println);
     }
-
-
 }

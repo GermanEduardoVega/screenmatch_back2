@@ -34,6 +34,7 @@ public class Principal {
                     4 - Buscar series por titulo
                     5 - Top 5 mejores series
                     6 - Buscar series por categoria
+                    7 - Filtrar series por temporadas y evaluacion
                                   
                     0 - Salir
                     """;
@@ -160,7 +161,7 @@ public class Principal {
         System.out.println("Con que evaluación, a partir de cuál valor? ");
         var evaluacion = teclado.nextDouble();
         teclado.nextLine();
-        List<Serie> filtroSeries = repositorio.findByTotalTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(totalTemporadas, evaluacion);
+        List<Serie> filtroSeries = repositorio.seriesPorTemporadaYEvaluacion();
         System.out.println("*** Series filtradas ***");
         filtroSeries.forEach(s ->
                 System.out.println(s.getTitulo() + "  - evaluacion: " + s.getEvaluacion()));

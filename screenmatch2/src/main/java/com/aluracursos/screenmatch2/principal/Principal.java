@@ -20,6 +20,7 @@ public class Principal {
     private SerieRepository repositorio;
     private List<Serie> series;
 
+    private Optional<Serie> serieBuscada;
     public Principal(SerieRepository serieRepository) {
         this.repositorio = serieRepository;
     }
@@ -36,6 +37,7 @@ public class Principal {
                     6 - Buscar series por categoria
                     7 - Filtrar series por temporadas y evaluacion
                     8 - Buscar episodios por titulo
+                    9 - Top 5 episodios por serie
                                   
                     0 - Salir
                     """;
@@ -67,6 +69,9 @@ public class Principal {
                     break;
                 case 8:
                     buscarEpisodiosPorTitulo();
+                    break;
+                case 9:
+                    buscarTop5Episodios();
                     break;
                 case 0:
                     System.out.println("Cerrando la aplicación...");
@@ -134,7 +139,7 @@ public class Principal {
         System.out.println("Escribe el nombre de la serie que deseas buscar: ");
         var nombreSerie  = teclado.nextLine();
 
-        Optional<Serie> serieBuscada = repositorio.findByTituloContainsIgnoreCase(nombreSerie);
+        serieBuscada = repositorio.findByTituloContainsIgnoreCase(nombreSerie);
 
         if (serieBuscada.isPresent()) {
             System.out.println("La serie buscada es: " + serieBuscada.get());
@@ -185,5 +190,20 @@ public class Principal {
                                 episodio.getEvaluacion()
                                     ));
 
+    }
+
+    private void buscarTop5Episodios() {
+        buscarSeriesPorTitulo();
+        if (serieBuscada.isPresent()) {
+            Serie serie = serieBuscada.get();
+            List<Episodio> topEpisodios = repositorio.top5Episodios(serie);
+            topEpisodios.forEach(episodio ->
+                    System.out.printf("Serie: %s - Temporada %s - Episodio:  %s - Evaluacion %s \n",
+                            episodio.getSerie().getTitulo(),
+                            episodio.getTemporada(),
+                            episodio.getTitulo(),
+                            episodio.getEvaluacion()));
+
+        }
     }
 }

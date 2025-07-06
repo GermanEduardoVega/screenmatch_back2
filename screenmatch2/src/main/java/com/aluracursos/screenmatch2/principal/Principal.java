@@ -60,6 +60,8 @@ public class Principal {
                 case 6:
                     buscarSeriePorCategoria();
                     break;
+                case 7:
+                    filtrarSeriesPorTemporadaYEvaluacion();
                 case 0:
                     System.out.println("Cerrando la aplicación...");
                     break;
@@ -149,5 +151,18 @@ public class Principal {
         System.out.println("Las series de la categoria " + genero);
         seriesPorCategoria.forEach(System.out::println);
 
+    }
+
+    private void filtrarSeriesPorTemporadaYEvaluacion() {
+        System.out.println("Filtrar séries con cuántas temporadas? ");
+        var totalTemporadas = teclado.nextInt();
+        teclado.nextLine();
+        System.out.println("Con que evaluación, a partir de cuál valor? ");
+        var evaluacion = teclado.nextDouble();
+        teclado.nextLine();
+        List<Serie> filtroSeries = repositorio.findByTotalTemporadasLessThanEqualAndEvaluacionGreaterThanEqual(totalTemporadas, evaluacion);
+        System.out.println("*** Series filtradas ***");
+        filtroSeries.forEach(s ->
+                System.out.println(s.getTitulo() + "  - evaluacion: " + s.getEvaluacion()));
     }
 }
